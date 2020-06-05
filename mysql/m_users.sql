@@ -16,9 +16,13 @@ CREATE TABLE m_users
     entrance_school_date    VARCHAR(64)  COMMENT '入学时间',
     is_authenticate         smallint(4)  COMMENT '是否已经实名制认证(0：未认证，1：已认证)',
     status                  smallint(4)  COMMENT '用户状态(-1：账户已注销，0：已经毕业，1：正常)',
-    create_time             TIMESTAMP    COMMENT  '用户注册时间的时间戳',
-    update_time             TIMESTAMP    COMMENT  '用户更新字段的时间戳',
+    create_time             TIMESTAMP    COMMENT '用户注册时间的时间戳',
+    update_time             TIMESTAMP    COMMENT '用户更新字段的时间戳',
     PRIMARY KEY (id),
     KEY idx (user_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 COMMENT='用户表'
+
+
+#     说明：
+#       用户的user_id，是hashkeys
