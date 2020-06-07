@@ -11,9 +11,11 @@ CREATE TABLE m_users
     sex                     smallint(4)  COMMENT '性别(0：女，1：男)',
     icon                    VARCHAR(64)  COMMENT '用户头像',
     school_section          smallint(4)  COMMENT '学段(0：大学生，1：研究生)',
-    school_id               VARCHAR(16)  COMMENT '学校ID',
+    school_id               VARCHAR(8)   COMMENT '学校ID',
     school_name             VARCHAR(64)  COMMENT '学校name',
-    entrance_school_date    VARCHAR(64)  COMMENT '入学时间',
+    profession_id           VARCHAR(16)  COMMENT '专业ID(p开头的7位数，如：p241745)',
+    profession_name         VARCHAR(64)  COMMENT '专业name',
+    entrance_school_date    date         COMMENT '入学时间',
     is_authenticate         smallint(4)  COMMENT '是否已经实名制认证(0：未认证，1：已认证)',
     status                  smallint(4)  COMMENT '用户状态(-1：账户已注销，0：已经毕业，1：正常)',
     create_time             TIMESTAMP    COMMENT '用户注册时间的时间戳',
@@ -26,3 +28,4 @@ COMMENT='用户表'
 
 #     说明：
 #       用户的user_id，是hashkeys
+#
