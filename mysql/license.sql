@@ -28,13 +28,13 @@ CREATE TABLE common_profession
     id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     profession_id           VARCHAR(16)  COMMENT '专业ID(p开头的7位数，如：p241745)',
     profession_name         VARCHAR(64)  COMMENT '专业name',
-    profession_section      smallint(4)  COMMENT '专业段位(1：专科专业，2：本科专业，7：专硕专业，8：学硕专业)',
+    profession_section      smallint(4)  COMMENT '专业段位(1：专科专业，2：本科专业，8：研究生专业)',
     update_time             TIMESTAMP    COMMENT '更新字段的时间戳',
     PRIMARY KEY (id),
     KEY idx (profession_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 COMMENT='专业维度表'
-#  说明：如果是专科专业，就是p1开头的7位数，如果是本科专业，就是p2开头，如果是专硕专业，就是p5，如果是学硕专业，就是p6
+#  说明：如果是专科专业，就是p1开头的7位数，如果是本科专业，就是p2开头，如果是研究上专业，就是p8
 
 
 
@@ -56,7 +56,6 @@ CREATE TABLE common_school
     school_address          VARCHAR(512) COMMENT '学校的详细地址',
     school_birthday         date         COMMENT '校庆日',
     school_tile             VARCHAR(512) COMMENT '学校的各种tile(如：985,211,双一流)',
-    section                 smallint(4)  COMMENT '学校段位(1：专科，2：普通本科，3：985、211，7：研究生院校或研究院)',
     hot                     int(8)       COMMENT '学校的火热程度(0-100的值)',
     branch_schoolid_list    VARCHAR(64)  COMMENT '当前学校的分校id(学校ID之间用,隔开，如：s24172,s82684)',
     update_time             TIMESTAMP    COMMENT '更新字段的时间戳',
@@ -80,10 +79,10 @@ CREATE TABLE common_postgraduate_profession
     school_tile             VARCHAR(512) COMMENT '专业的各种tile(如：985,211,双一流)',
     profession_id           VARCHAR(16)  COMMENT '专业ID(p开头的7位数，如：p241745)',
     profession_name         VARCHAR(64)  COMMENT '专业name',
-    profession_section      smallint(4)  COMMENT '专业段位(7：专硕，8：学硕)',
-    hot                     int(8)       COMMENT '学生考这个专业的火热程度(0-100的值)',
+    profession_section      smallint(4)  COMMENT '专业段位(8：专硕，9：学硕)',
     school_order            int(11)      COMMENT '学校综合实力在全国学校中的排名',
     profession_order        int(11)      COMMENT '专业的综合实力在全国同专业中的排名',
+    hot                     int(8)       COMMENT '学生考这个专业的火热程度(0-100的值)',
     last_5_admission_score  VARCHAR(32)  COMMENT '近五年的录取分数线(如：412,423,400,418,420)',
     update_time             TIMESTAMP    COMMENT '更新字段的时间戳',
     PRIMARY KEY (id),
