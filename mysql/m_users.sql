@@ -6,6 +6,7 @@ CREATE TABLE m_users
 (
     id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     user_id                 VARCHAR(64)  COMMENT '用户ID',
+    id_card                 VARCHAR(64)  COMMENT '用户的身份证ID',
     real_name               VARCHAR(64)  COMMENT '用户真实姓名',
     nick_name               VARCHAR(64)  COMMENT '用户昵称',
     sex                     smallint(4)  COMMENT '性别(0：女，1：男)',
@@ -54,6 +55,6 @@ CREATE TABLE m_certification
     create_time             TIMESTAMP    COMMENT '用户注册时间的时间戳',
     update_time             TIMESTAMP    COMMENT '用户更新字段的时间戳',
     PRIMARY KEY (id),
-    KEY idx (user_id)
+    KEY idx (school_id,user_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 COMMENT='用户基本表'
