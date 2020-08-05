@@ -1,11 +1,12 @@
 
 
 # 用户基本表
-DROP TABLE if exists m_users;
-CREATE TABLE m_users
+DROP TABLE if exists users_base;
+CREATE TABLE users_base
 (
     id                           BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-    user_id                      VARCHAR(48)  COMMENT '用户ID',
+    user_id                      VARCHAR(48)  COMMENT '用户的账号ID',
+    login_id                     VARCHAR(64)  COMMENT '用户的登陆ID(QQ微信手机号相互不互通)',
     id_card                      VARCHAR(24)  COMMENT '用户的身份证ID',
     real_name                    VARCHAR(64)  COMMENT '用户真实姓名',
     nick_name                    VARCHAR(24)  COMMENT '用户昵称(不超过8个字)',
@@ -17,13 +18,13 @@ CREATE TABLE m_users
     profession_section           smallint(4)  COMMENT '专业段位(1：专科专业，2：本科专业，8：专硕专业，9：学硕专业)',
     profession_id                VARCHAR(16)  COMMENT '专业ID(p开头的7位数，如：p241745)',
     profession_name              VARCHAR(64)  COMMENT '专业name',
-    join_class_list              VARCHAR(64)  COMMENT '加入的班级列表(班级id之间用逗号隔开)',
     is_authenticate              smallint(4)  COMMENT '是否已经实名制认证(0：未认证，1：已认证)',
+    authenticate_pic             VARCHAR(64)  COMMENT '认证时上传的学生证',
     status                       smallint(4)  COMMENT '用户状态(-1：账户已注销，0：已经毕业，1：正常)',
     create_time                  TIMESTAMP    COMMENT '用户注册时间的时间戳',
     update_time                  TIMESTAMP    COMMENT '用户更新字段的时间戳',
     PRIMARY KEY (id),
-    KEY idx (user_id)
+    KEY idx (user_id,login_id,school_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 COMMENT='用户基本表'
 
@@ -33,29 +34,48 @@ COMMENT='用户基本表'
 #
 
 
+# 用户登陆日志表
+DROP TABLE if exists login_log;
+CREATE TABLE login_log
+(
+    id                           BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    user_id                      VARCHAR(48)  COMMENT '用户的账号ID',
+    login_id                     VARCHAR(64)  COMMENT '用户的登陆ID(QQ微信手机号相互不互通)',
+    sex                          smallint(4)  COMMENT '性别(0：女，1：男)',
+    school_id                    VARCHAR(8)   COMMENT '学校ID',
+    profession_section           smallint(4)  COMMENT '专业段位(1：专科专业，2：本科专业，8：专硕专业，9：学硕专业)',
+    status                       smallint(4)  COMMENT '用户状态(-1：账户已注销，0：已经毕业，1：正常)',
+    login_time                   TIMESTAMP    COMMENT '用户登陆的时间戳',
+    PRIMARY KEY (id),
+    KEY idx (user_id,login_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8
+COMMENT='用户登陆日志表'
+
+
+
 
 
 
 
 
 # 用户证书认证表
-DROP TABLE if exists m_certification;
-CREATE TABLE m_certification
+DROP TABLE if exists certification_base;
+CREATE TABLE certification_base
 (
     id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     user_id                 VARCHAR(48)  COMMENT '用户ID',
+    login_id                VARCHAR(64)  COMMENT '用户的登陆ID(QQ微信手机号相互不互通)',
     school_section          smallint(4)  COMMENT '学段(1：大学生，7：研究生)',
     school_id               VARCHAR(8)   COMMENT '学校ID',
     school_name             VARCHAR(64)  COMMENT '学校name',
-    certificate_id          VARCHAR(16)  COMMENT '专业or证书ID(包含研究生专业id、和考的专业证书id)',
-    certificate_name        VARCHAR(16)  COMMENT '专业or证书name(包含研究生专业名，证书名称)',
-    type                    smallint(4)  COMMENT '证书类型(0：学生考的专业证书，1：专科学校学生证，2：本科学校学生证，8：专硕专业学生证，9：学硕专业学生证)',
+    certificate_id          VARCHAR(16)  COMMENT '证书ID(考的专业证书id)',
+    certificate_name        VARCHAR(16)  COMMENT '证书name(证书名称)',
     photo                   VARCHAR(64)  COMMENT '用户用于认证的证书照片',
     is_authenticate         smallint(4)  COMMENT '认证是否通过(0：未认证，1：已认证)',
     status                  smallint(4)  COMMENT '用户状态(0：已经毕业，1：正常)',
     create_time             TIMESTAMP    COMMENT '用户注册时间的时间戳',
     update_time             TIMESTAMP    COMMENT '用户更新字段的时间戳',
     PRIMARY KEY (id),
-    KEY idx (school_id,user_id)
+    KEY idx (user_id,school_id,)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
-COMMENT='用户基本表'
+COMMENT='用户证书认证表'

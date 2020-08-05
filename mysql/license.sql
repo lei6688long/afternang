@@ -3,8 +3,8 @@
 
 
 #  证书维度表
-DROP TABLE if exists common_license;
-CREATE TABLE common_license
+DROP TABLE if exists license_base;
+CREATE TABLE license_base
 (
     id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     license_id              VARCHAR(16)  COMMENT '证书ID(lic开头的8位数，如：lic41745)',
@@ -23,13 +23,13 @@ COMMENT='证书维度表'
 
 
 #  专业维度表
-DROP TABLE if exists common_profession;
-CREATE TABLE common_profession
+DROP TABLE if exists profession_base;
+CREATE TABLE profession_base
 (
     id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     profession_id           VARCHAR(16)  COMMENT '专业ID(p开头的7位数，如：p241745)',
     profession_name         VARCHAR(64)  COMMENT '专业name',
-    profession_section      smallint(4)  COMMENT '专业段位(1：专科专业，2：本科专业，8：研究生专业)',
+    profession_section      smallint(4)  COMMENT '专业段位(1：专科专业，2：本科专业，8：专硕专业，9：学硕专业)',
     create_time             TIMESTAMP    COMMENT '创建时间的时间戳',
     update_time             TIMESTAMP    COMMENT '更新字段的时间戳',
     PRIMARY KEY (id),
@@ -44,8 +44,8 @@ COMMENT='专业维度表'
 
 
 #  大学学校维度表
-DROP TABLE if exists common_school;
-CREATE TABLE common_school
+DROP TABLE if exists school_base;
+CREATE TABLE school_base
 (
     id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     province_id             VARCHAR(4)   COMMENT '省份ID',
@@ -72,8 +72,8 @@ COMMENT='学校维度表'
 
 
 #  研究生专业维度表
-DROP TABLE if exists common_postgraduate_profession;
-CREATE TABLE common_postgraduate_profession
+DROP TABLE if exists postgraduate_profession_base;
+CREATE TABLE postgraduate_profession_base
 (
     id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     school_id               VARCHAR(8)   COMMENT '学校ID(s开头的6位，如：s24175)',
