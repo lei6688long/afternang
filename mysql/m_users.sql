@@ -24,7 +24,7 @@ CREATE TABLE users_base
     create_time                  TIMESTAMP    COMMENT '用户注册时间的时间戳',
     update_time                  TIMESTAMP    COMMENT '用户更新字段的时间戳',
     PRIMARY KEY (id),
-    KEY idx (user_id,login_id,school_id)
+    KEY idx (user_id,school_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 COMMENT='用户基本表'
 
@@ -40,14 +40,11 @@ CREATE TABLE login_log
 (
     id                           BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     user_id                      VARCHAR(48)  COMMENT '用户的账号ID',
-    login_id                     VARCHAR(64)  COMMENT '用户的登陆ID(QQ微信手机号相互不互通)',
-    sex                          smallint(4)  COMMENT '性别(0：女，1：男)',
     school_id                    VARCHAR(8)   COMMENT '学校ID',
-    profession_section           smallint(4)  COMMENT '专业段位(1：专科专业，2：本科专业，8：专硕专业，9：学硕专业)',
     status                       smallint(4)  COMMENT '用户状态(-1：账户已注销，0：已经毕业，1：正常)',
     login_time                   TIMESTAMP    COMMENT '用户登陆的时间戳',
     PRIMARY KEY (id),
-    KEY idx (user_id,login_id)
+    KEY idx (user_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 COMMENT='用户登陆日志表'
 
@@ -64,7 +61,6 @@ CREATE TABLE certification_base
 (
     id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     user_id                 VARCHAR(48)  COMMENT '用户ID',
-    login_id                VARCHAR(64)  COMMENT '用户的登陆ID(QQ微信手机号相互不互通)',
     school_section          smallint(4)  COMMENT '学段(1：大学生，7：研究生)',
     school_id               VARCHAR(8)   COMMENT '学校ID',
     school_name             VARCHAR(64)  COMMENT '学校name',
@@ -76,6 +72,6 @@ CREATE TABLE certification_base
     create_time             TIMESTAMP    COMMENT '用户注册时间的时间戳',
     update_time             TIMESTAMP    COMMENT '用户更新字段的时间戳',
     PRIMARY KEY (id),
-    KEY idx (user_id,school_id,)
+    KEY idx (user_id,school_id,certificate_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 COMMENT='用户证书认证表'
