@@ -75,3 +75,25 @@ CREATE TABLE certification_base
     KEY idx (user_id,school_id,certificate_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 COMMENT='用户证书认证表'
+
+
+
+
+
+
+
+# 用户倒数日
+DROP TABLE if exists reciprocal_time;
+CREATE TABLE reciprocal_time
+(
+    id                      BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    user_id                 VARCHAR(48)  COMMENT '用户ID',
+    event_tile              VARCHAR(16)  COMMENT '事件标题',
+    finish_time             TIMESTAMP    COMMENT '结束日期',
+    status                  smallint(4)  COMMENT '事件状态(0：过期，1：有效)',
+    create_time             TIMESTAMP    COMMENT '用户注册时间的时间戳',
+    update_time             TIMESTAMP    COMMENT '用户更新字段的时间戳',
+    PRIMARY KEY (id),
+    KEY idx (user_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8
+COMMENT='用户倒数日'
