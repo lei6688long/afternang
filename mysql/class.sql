@@ -84,8 +84,9 @@ DROP TABLE if exists growing_class_log;
 CREATE TABLE growing_class_log
 (
     id                           BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    data_period                  VARCHAR(16)  COMMENT '日期',
     class_id                     VARCHAR(32)  COMMENT '班级ID',
-    first_study_date             TIMESTAMP    COMMENT '每天班级中最早的学习时间',
+    first_study_time             TIMESTAMP    COMMENT '每天班级中最早的学习时间',
     first_study_user_id          VARCHAR(48)  COMMENT '每天班级中最早的学习用户ID',
     create_time                  TIMESTAMP    COMMENT '创建时间的时间戳',
     update_time                  TIMESTAMP    COMMENT '更新字段的时间戳',
@@ -103,11 +104,12 @@ DROP TABLE if exists growing_class_user_log;
 CREATE TABLE growing_class_user_log
 (
     id                           BIGINT       NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    data_period                  VARCHAR(16)  COMMENT '日期',
     user_id                      VARCHAR(48)  COMMENT '用户的账号ID',
     nick_name                    VARCHAR(24)  COMMENT '用户昵称(不超过8个字)',
     icon                         VARCHAR(64)  COMMENT '用户头像',
     class_id                     VARCHAR(32)  COMMENT '用户所属班级ID',
-    study_start_date             TIMESTAMP    COMMENT '一天中学习最早开始时间',
+    study_start_time             TIMESTAMP    COMMENT '一天中学习最早开始时间',
     study_duration               BIGINT       COMMENT '学习时长',
     is_study_active              tinyint      COMMENT '是否在学习状态(0:未学习，1:正在学习，2:暂停休息)',
     create_time                  TIMESTAMP    COMMENT '创建时间的时间戳',
@@ -159,9 +161,8 @@ DROP TABLE if exists supervise_class_study_log;
 CREATE TABLE supervise_class_study_log
 (
     id                             BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-    class_id                       VARCHAR(32)  COMMENT '班级ID',
+    data_period                    VARCHAR(16)  COMMENT '日期',
     user_id                        VARCHAR(48)  COMMENT '用户的账号ID',
-    study_duration                 BIGINT       COMMENT '学习时长',
     chat_duration                  BIGINT       COMMENT '聊天时长',
     play_duration                  BIGINT       COMMENT '娱乐时长',
     total_work_situation           tinyint      COMMENT '今日任务总体完成情况',
