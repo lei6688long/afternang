@@ -121,6 +121,50 @@ COMMENT='成长班级用户个人的学习情况'
 
 
 
+#  班级评论模块
+class_comment
+{
+    "classid":"班级ID",
+    "star5":"5星好评数",
+    "star4":"4星好评数",
+    "star3":"3星好评数",
+    "star2":"2星好评数",
+    "star1":"1星好评数",
+    "ccount": "评论总数",
+    "comment":[
+        {
+            "schoolid":"学校id",
+            "userid":"用户ID",
+            "nickname":"用户昵称",
+            "icon":"用户头像",
+            "cTime":"评论时间",
+            "starLevel": "评论标星数",
+            "context":"评论的内容"
+        },
+        {
+            "schoolid":"学校id",
+            "userid":"用户ID",
+            "nickname":"用户昵称",
+            "icon":"用户头像",
+            "cTime":"评论时间",
+            "starLevel": "评论标星数",
+            "context":"评论的内容"
+        },
+        {
+            "schoolid":"学校id",
+            "userid":"用户ID",
+            "nickname":"用户昵称",
+            "icon":"用户头像",
+            "cTime":"评论时间",
+            "starLevel": "评论标星数",
+            "context":"评论的内容"
+        }
+    ],
+    "upTime":"更新时间"
+}
+
+
+
 
 
 
